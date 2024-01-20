@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: myapp-container
-          image: bossmanjerry/cicd-project:latest
+          image: bossmanjerry/devops-project:latest
           ports:
             - containerPort: 5000
