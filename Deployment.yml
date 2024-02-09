@@ -15,6 +15,7 @@ spec:
       containers:
         - name: myapp-container
           image: bossmanjerry/cicd-demos:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
             
