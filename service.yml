@@ -6,14 +6,10 @@ spec:
   selector:
     app: myapp
   ports:
-    - protocol: TCP
-      port: 5000
-      targetPort: 5000
-  type: LoadBalancer
       # Port accessible inside cluster
-      #- port: 5000
+      - port: 5000
         # Port to forward to inside the pod
-        #targetPort: 5000
+        targetPort: 5000
         # Port accessible outside cluster
-        #nodePort: 30002
-  #type: NodePort
+        nodePort: 30002
+  type: NodePort
