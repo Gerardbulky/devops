@@ -44,17 +44,16 @@ pipeline {
             steps {
                 script {
                     sshagent(['ansible-server']) {
-                    //Logging into vault
+                    // Logging into vault
                         withVault(
                             configuration: [
                                 disableChildPoliciesOverride: false, 
                                 timeout: 60, 
                                 vaultCredentialId: 'vault-jenkins-role', 
-                                vaultUrl: 'http://13.60.75.120:8200'], 
+                                vaultUrl: 'http://51.21.129.213:8200'], 
                                 vaultSecrets: [
-                                    [path: 'secrets/creds/my-secret-text', secretValues: [[vaultKey: 'username'], [vaultKey: 'password']]]]) {
-                            //sh 'ssh -o StrictHostKeyChecking=no ubuntu@ansible_server_private_ip docker login -u $username -p $password'
-                            sh 'echo $password | ssh -o StrictHostKeyChecking=no ubuntu@${ansible_server_private_ip} docker login -u $username --password-stdin'
+                                    [path: 'secrets/creds/my-secret-text', secretValues: [[vaultKey: 'dockerhub_username'], [vaultKey: 'dockerhub_password']]]]) {
+                            sh 'echo $dockerhub_password | ssh -o StrictHostKeyChecking=no ubuntu@${ansible_server_private_ip} docker login -u $dockerhub_username --password-stdin'
                             sh 'ssh -o StrictHostKeyChecking=no ubuntu@${ansible_server_private_ip} docker image push bossmanjerry/cicd-demos:v-$BUILD_ID'
                             sh 'ssh -o StrictHostKeyChecking=no ubuntu@${ansible_server_private_ip} docker image push bossmanjerry/cicd-demos:latest'
                             //also delete old docker images
