@@ -3,12 +3,12 @@
   become_user: root
   tasks:
     - name: delete old deployment
-      command: kubectl delete -f /home/ubuntu/Deployment.yml --kubeconfig=/home/ubuntu/.kube/config
+      command: kubectl delete -f /home/ubuntu/deployment.yml --kubeconfig=/home/ubuntu/.kube/config
       ignore_errors: true
     - name: delete old service
-      command: kubectl delete -f /home/ubuntu/Service.yml --kubeconfig=/home/ubuntu/.kube/config
+      command: kubectl delete -f /home/ubuntu/service.yml --kubeconfig=/home/ubuntu/.kube/config
       ignore_errors: true
     - name: create new deployment
-      command: kubectl apply -f /home/ubuntu/Deployment.yml --kubeconfig=/home/ubuntu/.kube/config
+      command: kubectl apply -f /home/ubuntu/deployment.yml --kubeconfig=/home/ubuntu/.kube/config
     - name: create new service
-      command: kubectl apply -f /home/ubuntu/Service.yml --force --kubeconfig=/home/ubuntu/.kube/config
+      command: kubectl apply -f /home/ubuntu/service.yml --force --kubeconfig=/home/ubuntu/.kube/config
